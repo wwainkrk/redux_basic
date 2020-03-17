@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, bindActionCreators } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 /* Initial data for first reducer - feature */
@@ -55,10 +55,23 @@ function actors(state = initialActors, action) {
 
 const allReducers = combineReducers({movies, actors})             // combine both reducers
 const store = createStore(allReducers, composeWithDevTools())    // initiate Redux store, for combined reducer
+
+/* Few ways to dispatch function */
+
+store.dispatch({type: 'ADD_ACTOR', actor: 'Meghan Markle'})     // simply dispatch on store
+
+const addActor = item => ({type: 'ADD_ACTOR', actor: item})
+const reset = () => ({type: 'RESET_ACTORS'})
+store.dispatch(addActor('x'))
+
+const actorsActions = bindActionCreators({add: addActor, reset}, store.dispatch)
+actorsActions.add('y')
+actorsActions.reset()
+
 window.store = store
 
 
-/* Main component to render - simpy react-app */
+/* Main component to render - simply react-app */
 class App extends Component {
   render() {
     return (
