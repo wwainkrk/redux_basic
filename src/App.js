@@ -1,74 +1,29 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { createStore, combineReducers, bindActionCreators } from 'redux'
+import { createStore, bindActionCreators } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducers'
 
-/* Initial data for first reducer - feature */
-const initialMovies = {
-  listName: 'Favourite',
-  list: [
-    'Prestige', 'Wolf of Wall Street', '60 seconds'
-  ]
-}
-
-/* Initial data for second reducer - feature */
-const initialActors = {
-  listName: 'Best',
-  list: [
-    'Leonardo Di Caprio', 'Christian Bale', 'Scarlett Johansson'
-  ]
-}
-
-
-/* First reducer with unique actions for dispatch */
-function movies(state = initialMovies, action) {
-  switch (action.type) {
-    case 'RESET_MOVIES':                                         // first action
-      return {
-        ...state, list: []                              // we keep old data in 'state'
-      }
-    case 'ADD_MOVIE':                                           // second action  
-      return {
-        ...state, list: [...state.list, action.movie] // we keep old data in 'state', movie will be provided as argument
-      }
-    default:
-      return state
-  }
-}
-
-/* Second reducer with unique actions for dispatch */
-function actors(state = initialActors, action) {
-  switch (action.type) {
-    case 'RESET_ACTORS':                                         // first action
-      return {
-        ...state, list: []                              // we keep old data in 'state'
-      }
-    case 'ADD_ACTOR':                                           // second action  
-      return {
-        ...state, list: [...state.list, action.actor] // we keep old data in 'state', actor will be provided as argument
-      }
-    default:
-      return state
-  }
-}
-
-const allReducers = combineReducers({movies, actors})             // combine both reducers
-const store = createStore(allReducers, composeWithDevTools())    // initiate Redux store, for combined reducer
+import { moviesActions } from './app/movies/duck'
+            
+const store = createStore(rootReducer, composeWithDevTools())    // initiate Redux store, for combined reducer
 
 /* Few ways to dispatch function */
 
-store.dispatch({type: 'ADD_ACTOR', actor: 'Meghan Markle'})     // simply dispatch on store
+//store.dispatch({type: 'ADD_ACTOR', actor: 'Meghan Markle'})     // simply dispatch on store
 
-const addActor = item => ({type: 'ADD_ACTOR', actor: item})
-const reset = () => ({type: 'RESET_ACTORS'})
-store.dispatch(addActor('x'))
+// const addActor = item => ({type: 'ADD_ACTOR', actor: item})
+// const reset = () => ({type: 'RESET_ACTORS'})
+// store.dispatch(addActor('Patrick J. Adams'))
 
-const actorsActions = bindActionCreators({add: addActor, reset}, store.dispatch)
-actorsActions.add('y')
-actorsActions.reset()
+// const actorsActions = bindActionCreators({add: addActor, reset}, store.dispatch)
+// actorsActions.add('Gabriel Macht')
+// actorsActions.reset()
 
 window.store = store
+
+store.dispatch(moviesActions.add('Sala Samobojcow: Hejter'))
 
 
 /* Main component to render - simply react-app */
