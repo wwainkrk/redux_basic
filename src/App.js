@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { createStore, bindActionCreators } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import rootReducer from './reducers'
 
-import { moviesActions } from './app/movies/duck'
-            
-const store = createStore(rootReducer, composeWithDevTools())    // initiate Redux store, for combined reducer
 
 /* Few ways to dispatch function */
 
@@ -21,9 +15,6 @@ const store = createStore(rootReducer, composeWithDevTools())    // initiate Red
 // actorsActions.add('Gabriel Macht')
 // actorsActions.reset()
 
-window.store = store
-
-store.dispatch(moviesActions.add('Sala Samobojcow: Hejter'))
 
 
 /* Main component to render - simply react-app */

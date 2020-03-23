@@ -18,7 +18,7 @@ const actorsReducer = (state = INITIAL_STATE, action) => {
         }
       case types.ADD_ACTOR:                                           // second action  
         return {
-          ...state, list: [...state.list, action.actor] // we keep old data in 'state', actor will be provided as argument
+          ...state, list: [...state.list, action.item] // we keep old data in 'state', actor will be provided as argument
         }
       default:
         return state
