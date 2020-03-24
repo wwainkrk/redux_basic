@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MovieContainer from './app/movies/components/MovieContainer'
 
 
 /* Few ways to dispatch function */
@@ -35,6 +36,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <MovieContainer />
         </header>
       </div>
     );
