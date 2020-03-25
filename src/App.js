@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MovieContainer from './app/movies/components/MovieContainer'
+import MovieForm from './app/movies/components/MovieForm'
 
 
 /* Few ways to dispatch function */
@@ -25,18 +26,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          {/* Additional list component based on Redux state */}
           <MovieContainer />
+          {/* Form component */}
+          <MovieForm />
         </header>
       </div>
     );
