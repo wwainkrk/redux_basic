@@ -1,20 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import actions from '../duck/actions'
 
-const MovieForm = () => {
+const MovieForm = (props) => {
 
     // Ref is something like a id
     const movieInput = React.createRef()
 
     const addMovie = (event) => {
         event.preventDefault()
-        console.log('form', movieInput.current.value)           // Display movie from form in console
+        props.add(movieInput.current.value)                     // dispatch function with value from form
+
+        movieInput.current.value = ''                           // after dispatch, form field with empty value
     }
 
 
     return <form onSubmit={addMovie}>
         <input ref={movieInput} />
-        <button type='submit'>Add movie</button>}
+        <button type='submit'>Add movie</button>
     </form>
 }
 
-export default MovieForm
+const mapDispatchToProps = dispatch => ({
+    add: movie => dispatch(actions.add(movie))
+})
+
+export default connect(null, mapDispatchToProps)(MovieForm)      // connect with dispatch function, how changes
